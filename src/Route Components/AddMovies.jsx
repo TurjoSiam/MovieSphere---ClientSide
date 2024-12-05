@@ -29,18 +29,6 @@ const AddMovies = () => {
         })
     }
 
-    // fetch('http://localhost:5000/allmovies', {
-    //     method: 'POST',
-    //     headers: {
-    //         'content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify(data)
-    // })
-    // .then(res => res.json())
-    // .then(data => {
-    //     console.log(data);
-    // })
-
 
 
 
@@ -61,7 +49,7 @@ const AddMovies = () => {
                             Genre
                         </label>
                         <select {...register("genre")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                            <option className="flex items-center justify-between">Select a genre</option>
+                            <option value="">Select a genre</option>
                             <option value="Animated">Animated</option>
                             <option value="Action">Action</option>
                             <option value="Adventure">Adventure</option>
@@ -81,7 +69,7 @@ const AddMovies = () => {
                             Release Year
                         </label>
                         <select {...register("year")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                            <option className="flex items-center justify-between">Select a year</option>
+                            <option value="">Select a year</option>
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                             <option value="2022">2022</option>
@@ -101,7 +89,7 @@ const AddMovies = () => {
                             Rating
                         </label>
                         <input hidden {...register("rating")} type="number" value={rating} />
-                        <Rating onClick={handleRating}></Rating>
+                        <Rating onClick={handleRating} transition={true} allowFraction={true}></Rating>
                     </div>
                 </div>
                 {/* summary */}
@@ -113,6 +101,7 @@ const AddMovies = () => {
                 </div>
                 {/* submit */}
                 <input className="btn" type="submit" value="Submit" />
+
             </form>
         </div>
     );
