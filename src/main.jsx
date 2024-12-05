@@ -15,6 +15,8 @@ import Register from './Route Components/Register.jsx';
 import Login from './Route Components/Login.jsx';
 import ForgotPassword from './Route Components/ForgotPassword.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
+import MyFavourites from './Route Components/MyFavourites.jsx';
+import PrivateRoute from './Route Components/PrivateRoute.jsx';
 
 
 const router = createBrowserRouter([
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addmovies",
-        element: <AddMovies></AddMovies>
+        element: <PrivateRoute><AddMovies></AddMovies></PrivateRoute>
+      },
+      {
+        path: "/myfavorite",
+        element: <PrivateRoute><MyFavourites></MyFavourites></PrivateRoute>
       },
       {
         path: "/allmovies",

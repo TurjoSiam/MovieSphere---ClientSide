@@ -1,16 +1,39 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
+    const { signInUser, googleLogin } = useContext(AuthContext);
+
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        console.log(data);
+        const { email, password } = data;
+        signInUser(email, password)
+            .then(result => {
+                console.log(result);
+                alert('user logged in successfully')
+            })
+            .catch((error) => {
+                console.log('ERROR', error);
+                alert('something went wrong')
+            })
     }
 
-
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then((result) => {
+                console.log(result);
+                navigate("/");
+                alert('google login successful')
+            })
+    }
 
     return (
         <div className="w-full mx-auto my-10">
@@ -30,8 +53,9 @@ const Login = () => {
                     <input {...register("password")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password" placeholder="******" />
                 </div>
                 {/* submit */}
-                <p className="text-sm text-gray-600 mb-10">New user? <Link to="/register" className="text-blue-600 hover:font-bold">Register</Link></p>
-                <input className="btn" type="submit" value="Login" />
+                <p className="text-sm text-gray-600 mb-6">New user?<Link to="/register" className="text-blue-600 hover:font-bold">  Register</Link></p>
+                <input className="btn mb-3 w-full" type="submit" value="Login" />
+                <button onClick={handleGoogleLogin} className='btn w-full flex items-center gap-1'><FcGoogle /> Login with Google</button>
             </form>
         </div>
     );

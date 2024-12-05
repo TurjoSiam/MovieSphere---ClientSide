@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { FaUserAlt } from "react-icons/fa";
 import { MdEmail, MdInsertPhoto } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const { createUser, updateProfileWhenLogin } = useContext(AuthContext);
 
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
@@ -18,6 +20,18 @@ const Register = () => {
         .then(result => {
             console.log(result);
             reset();
+            updateProfileWhenLogin({
+                displayName: name,
+                photoURL: photo
+            })
+            .then(() => {
+                navigate("/");
+                alert('User registered successfully')
+            })
+        })
+        .catch((error) => {
+            console.log('ERROR', error);
+            alert('something went wrong')
         })
     }
 
@@ -53,8 +67,8 @@ const Register = () => {
                     <input {...register("password")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password" placeholder="******" />
                 </div>
                 {/* submit */}
-                <p className="text-sm text-gray-600 mb-10">Already registered? <Link to="/login" className="text-blue-600 hover:font-bold">Login Here</Link></p>
-                <input className="btn" type="submit" value="Register" />
+                <p className="text-sm text-gray-600 mb-10">Already registered?<Link to="/login" className="text-blue-600 hover:font-bold"> Login Here</Link></p>
+                <input className="btn w-full" type="submit" value="Register" />
             </form>
         </div>
     );
