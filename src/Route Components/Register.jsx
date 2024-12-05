@@ -1,14 +1,24 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaUserAlt } from "react-icons/fa";
 import { MdEmail, MdInsertPhoto } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
 
-    const { register, handleSubmit } = useForm();
+    const { createUser } = useContext(AuthContext);
+
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        console.log(data);
+        const {name, email, photo, password} = data;
+
+        createUser(email, password)
+        .then(result => {
+            console.log(result);
+            reset();
+        })
     }
 
 
@@ -20,25 +30,25 @@ const Register = () => {
                 {/* title and genre */}
                 <div className="w-full mb-6">
                     <label className="uppercase tracking-wide text-gray-700 text-sm flex items-center gap-1 font-bold mb-2">
-                    <FaUserAlt />Name
+                        <FaUserAlt />Name
                     </label>
                     <input {...register("name")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Jhon Doe" />
                 </div>
                 <div className="w-full mb-6">
                     <label className="uppercase tracking-wide text-gray-700 text-sm flex items-center gap-1 font-bold mb-2">
-                    <MdEmail />Email
+                        <MdEmail />Email
                     </label>
                     <input {...register("email")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="email" placeholder="example@gmail.com" />
                 </div>
                 <div className="w-full mb-6">
                     <label className="uppercase tracking-wide text-gray-700 text-sm flex items-center gap-1 font-bold mb-2">
-                    <MdInsertPhoto />Photo URL
+                        <MdInsertPhoto />Photo URL
                     </label>
                     <input {...register("photo")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="https://example.com" />
                 </div>
                 <div className="w-full">
                     <label className="uppercase tracking-wide text-gray-700 text-sm flex items-center gap-1 font-bold mb-2">
-                    <RiLockPasswordFill />Password
+                        <RiLockPasswordFill />Password
                     </label>
                     <input {...register("password")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password" placeholder="******" />
                 </div>

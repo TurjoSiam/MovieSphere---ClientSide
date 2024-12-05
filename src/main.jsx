@@ -13,6 +13,8 @@ import AllMovies from './Route Components/AllMovies.jsx';
 import Policy from './Route Components/Policy.jsx';
 import Register from './Route Components/Register.jsx';
 import Login from './Route Components/Login.jsx';
+import ForgotPassword from './Route Components/ForgotPassword.jsx';
+import AuthProvider from './Provider/AuthProvider.jsx';
 
 
 const router = createBrowserRouter([
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>
+      },
+      {
+        path: "/forgotpassword",
+        element: <ForgotPassword></ForgotPassword>
       }
     ],
   },
@@ -54,6 +60,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
