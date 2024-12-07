@@ -17,6 +17,7 @@ import ForgotPassword from './Route Components/ForgotPassword.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import MyFavourites from './Route Components/MyFavourites.jsx';
 import PrivateRoute from './Route Components/PrivateRoute.jsx';
+import MovieDetails from './Route Components/MovieDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/allmovies')
+        loader: () => fetch('http://localhost:5000/featuredmovies')
       },
       {
         path: "/addmovies",
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
         path: "/allmovies",
         element: <AllMovies></AllMovies>,
         loader: () => fetch('http://localhost:5000/allmovies')
+      },
+      {
+        path: "/allmovies/:id",
+        element: <PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/allmovies/${params.id}`)
       },
       {
         path: "/policy",

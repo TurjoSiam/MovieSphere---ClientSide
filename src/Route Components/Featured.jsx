@@ -1,12 +1,7 @@
-import { Link } from "react-router-dom";
 
-const Movie = ({ movie }) => {
+const Featured = ({movie}) => {
 
-    const handleDetails = (_id) => {
-        console.log(_id);
-    }
-
-    const { _id, title, year, genre, rating, duration, poster } = movie;
+    const { title, year, genre, rating, duration, poster } = movie;
 
     return (
         <div className="w-[250px]">
@@ -20,9 +15,9 @@ const Movie = ({ movie }) => {
                 <h2 className="text-gray-500 font-semibold">{year}</h2>
                 <h2 className="text-gray-500 font-semibold">{duration} minutes</h2>
             </div>
-            <Link to={`/allmovies/${_id}`} onClick={() => handleDetails(_id)} className="btn w-full">See Details</Link>
+            <button className="btn w-full">See Details</button>
         </div>
     );
 };
 
-export default Movie;
+export default Featured;
