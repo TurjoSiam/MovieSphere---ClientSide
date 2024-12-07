@@ -1,7 +1,12 @@
+import { Link } from "react-router-dom";
 
 const Featured = ({movie}) => {
 
-    const { title, year, genre, rating, duration, poster } = movie;
+    const handleDetails = (_id) => {
+        console.log(_id);
+    }
+
+    const { _id, title, year, genre, rating, duration, poster } = movie;
 
     return (
         <div className="w-[250px]">
@@ -15,7 +20,7 @@ const Featured = ({movie}) => {
                 <h2 className="text-gray-500 font-semibold">{year}</h2>
                 <h2 className="text-gray-500 font-semibold">{duration} minutes</h2>
             </div>
-            <button className="btn w-full">See Details</button>
+            <Link to={`/allmovies/${_id}`} onClick={() => handleDetails(_id)} className="btn w-full">See Details</Link>
         </div>
     );
 };
