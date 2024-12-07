@@ -40,7 +40,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/allmovies",
-        element: <AllMovies></AllMovies>
+        element: <AllMovies></AllMovies>,
+        loader: () => fetch('http://localhost:5000/allmovies')
       },
       {
         path: "/policy",

@@ -1,10 +1,13 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
+import { AuthContext } from "../Provider/AuthProvider";
 
 
 const AddMovies = () => {
+
+    const { user } = useContext(AuthContext);
 
     const [rating, setRating] = useState(0);
 
@@ -12,7 +15,9 @@ const AddMovies = () => {
         setRating(rate);
     }
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+
+
     const onSubmit = data => {
         data.rating = rating;
 
@@ -23,10 +28,11 @@ const AddMovies = () => {
             },
             body: JSON.stringify(data)
         })
-        .then(res => res.json())
-        .then(result => {
-            console.log(result);
-        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                reset();
+            })
     }
 
 
@@ -53,6 +59,8 @@ const AddMovies = () => {
                             <option value="Animated">Animated</option>
                             <option value="Action">Action</option>
                             <option value="Adventure">Adventure</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Music">Music</option>
                         </select>
                     </div>
                 </div>
@@ -70,6 +78,11 @@ const AddMovies = () => {
                         </label>
                         <select {...register("year")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="">Select a year</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                             <option value="2022">2022</option>
@@ -88,19 +101,38 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Rating
                         </label>
-                        <input hidden {...register("rating")} type="number" value={rating} />
-                        <Rating onClick={handleRating} transition={true} allowFraction={true}></Rating>
+                        <div className="flex items-center gap-2">
+                            <Rating onClick={handleRating} transition={true} allowFraction={true}></Rating>
+                            <input readOnly className="py-2 text-center appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded"  {...register("rating")} type="text" value={rating} />
+                        </div>
                     </div>
                 </div>
+                {/* email and cover photo */}
+                <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Email
+                        </label>
+                        <input {...register("email")} className="appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" readOnly defaultValue={user?.email} />
+                    </div>
+                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Cover Photo (Optional)
+                        </label>
+                        <input {...register("cover")} className="appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Add cover photo" />
+                    </div>
+                </div>
+                {/* email */}
+
                 {/* summary */}
                 <div className="w-full mb-10">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Summary
                     </label>
-                    <input {...register("summary")} className="appearance-none block w-full h-32 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Write small summary of the movie" />
+                    <textarea {...register("summary")} className="appearance-none block w-full h-32 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Write small summary of the movie" />
                 </div>
                 {/* submit */}
-                <input className="btn" type="submit" value="Submit" />
+                <input className="btn w-full" type="submit" value="Add Movie" />
 
             </form>
         </div>
