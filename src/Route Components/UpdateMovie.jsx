@@ -1,13 +1,13 @@
-
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
-import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
+const UpdateMovie = () => {
 
-const AddMovies = () => {
-
-    const { user } = useContext(AuthContext);
+    const data = useLoaderData();
+    const { _id, title, year, genre, summary, duration, poster, cover, email } = data;
 
     const [rating, setRating] = useState(0);
 
@@ -15,14 +15,13 @@ const AddMovies = () => {
         setRating(rate);
     }
 
-    const { register, handleSubmit, reset } = useForm();
-
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = data => {
         data.rating = rating;
 
-        fetch('http://localhost:5000/allmovies', {
-            method: 'POST',
+        fetch(`http://localhost:5000/allmovies/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -31,16 +30,17 @@ const AddMovies = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                reset();
+                Swal.fire({
+                    title: "Updated!",
+                    text: "Your movie has been updated.",
+                    icon: "success"
+                });
             })
     }
 
-
-
-
     return (
         <div className="w-full mx-auto my-10">
-            <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">Add New Movie</h2>
+            <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">Update Movie Information</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto max-w-lg">
                 {/* title and genre */}
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -48,13 +48,13 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Movie Title
                         </label>
-                        <input {...register("title")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Movie title" />
+                        <input {...register("title")} defaultValue={title} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Movie title" />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Genre
                         </label>
-                        <select {...register("genre")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <select {...register("genre")} defaultValue={genre} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="">Select a genre</option>
                             <option value="Animated">Animated</option>
                             <option value="Action">Action</option>
@@ -70,13 +70,13 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Duration
                         </label>
-                        <input {...register("duration")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" placeholder="Duration (minutes)" />
+                        <input {...register("duration")} defaultValue={duration} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" placeholder="Duration (minutes)" />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Release Year
                         </label>
-                        <select {...register("year")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <select {...register("year")} defaultValue={year} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="">Select a year</option>
                             <option value="2015">2015</option>
                             <option value="2016">2016</option>
@@ -93,7 +93,7 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Poster
                         </label>
-                        <input {...register("poster")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Image URL" />
+                        <input {...register("poster")} defaultValue={poster} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Image URL" />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -111,13 +111,13 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Email
                         </label>
-                        <input {...register("email")} className="appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" readOnly defaultValue={user?.email} />
+                        <input {...register("email")} className="appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" readOnly defaultValue={email} />
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Cover Photo (Optional)
                         </label>
-                        <input {...register("cover")} className="appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Add cover photo" />
+                        <input {...register("cover")} defaultValue={cover} className="appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Add cover photo" />
                     </div>
                 </div>
                 {/* email */}
@@ -127,14 +127,14 @@ const AddMovies = () => {
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Summary
                     </label>
-                    <textarea {...register("summary")} className="appearance-none block w-full h-32 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Write small summary of the movie" />
+                    <textarea {...register("summary")} defaultValue={summary} className="appearance-none block w-full h-32 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Write small summary of the movie" />
                 </div>
                 {/* submit */}
-                <input className="btn w-full" type="submit" value="Add Movie" />
+                <input className="btn w-full" type="submit" value="Update Movie" />
 
             </form>
         </div>
     );
 };
 
-export default AddMovies;
+export default UpdateMovie;

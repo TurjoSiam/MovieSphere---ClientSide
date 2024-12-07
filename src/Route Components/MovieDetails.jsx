@@ -1,8 +1,11 @@
+import { FaEdit } from "react-icons/fa";
 import { MdDelete, MdFavorite } from "react-icons/md";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MovieDetails = () => {
+
+    const navigate = useNavigate();
 
     const data = useLoaderData();
     const { _id, title, year, genre, rating, summary, duration, poster, cover } = data;
@@ -32,6 +35,7 @@ const MovieDetails = () => {
                                 icon: "success"
                             });
                         }
+                        navigate("/allmovies")
                     })
             }
         });
@@ -57,6 +61,7 @@ const MovieDetails = () => {
                         </div>
                         <div>
                             <button onClick={() => handleDelete(_id)} className="btn mr-2"><MdDelete />Delete</button>
+                            <Link to={`/allmovies/updatemovie/${_id}`} className="btn mr-2"><FaEdit />Update</Link>
                             <button className="btn"><MdFavorite />Add to Favorite</button>
                         </div>
                     </div>
