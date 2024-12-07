@@ -47,7 +47,7 @@ const MovieDetails = () => {
             <div className="w-full">
                 <img className="w-full max-h-[500px] object-cover brightness-50" src={cover} alt="movie cover photo" />
             </div>
-            <div className="w-full h-[500px] relative">
+            <div className="w-full h-[400px] relative">
                 <div className="absolute border p-7 bg-base-100 rounded-2xl -top-28 flex items-start justify-start gap-7 w-8/12 mx-auto inset-x-0">
                     <img className="w-60 rounded-xl" src={poster} alt="movie poster" />
                     <div className="space-y-4">
