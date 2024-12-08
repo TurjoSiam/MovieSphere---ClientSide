@@ -22,7 +22,7 @@ const MovieDetails = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/allmovies/${_id}`,{
+                fetch(`http://localhost:5000/allmovies/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -41,6 +41,10 @@ const MovieDetails = () => {
         });
     }
 
+    const handleAllMovies = () => {
+        navigate("/allmovies")
+    }
+
 
     return (
         <div>
@@ -49,7 +53,10 @@ const MovieDetails = () => {
             </div>
             <div className="w-full h-[400px] relative">
                 <div className="absolute border p-7 bg-base-100 rounded-2xl -top-28 flex items-start justify-start gap-7 w-8/12 mx-auto inset-x-0">
-                    <img className="w-60 rounded-xl" src={poster} alt="movie poster" />
+                    <div className="w-full">
+                        <img className="w-60 rounded-xl" src={poster} alt="movie poster" />
+                        <button onClick={handleAllMovies} className="btn mt-3 w-full">All Movies</button>
+                    </div>
                     <div className="space-y-4">
                         <h2 className="text-4xl font-bold">{title}</h2>
                         <p className="text-gray-700">{summary}</p>
