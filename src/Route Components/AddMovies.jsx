@@ -24,7 +24,7 @@ const AddMovies = () => {
     const onSubmit = data => {
         data.rating = rating;
 
-        fetch('http://localhost:5000/allmovies', {
+        fetch('https://server-side-alpha-dusky.vercel.app/allmovies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

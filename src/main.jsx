@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/featuredmovies')
+        loader: () => fetch('https://server-side-alpha-dusky.vercel.app/featuredmovies')
       },
       {
         path: "/addmovies",
@@ -39,22 +39,22 @@ const router = createBrowserRouter([
       {
         path: "/myfavorite/:email",
         element: <PrivateRoute><MyFavourites></MyFavourites></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/favoritemovies/${params.email}`)
+        loader: ({params}) => fetch(`https://server-side-alpha-dusky.vercel.app/favoritemovies/${params.email}`)
       },
       {
         path: "/allmovies",
         element: <AllMovies></AllMovies>,
-        loader: () => fetch('http://localhost:5000/allmovies')
+        loader: () => fetch('https://server-side-alpha-dusky.vercel.app/allmovies')
       },
       {
         path: "/allmovies/:id",
         element: <PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/allmovies/${params.id}`)
+        loader: ({params}) => fetch(`https://server-side-alpha-dusky.vercel.app/allmovies/${params.id}`)
       },
       {
         path: "/allmovies/updatemovie/:id",
         element: <PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/allmovies/${params.id}`)
+        loader: ({params}) => fetch(`https://server-side-alpha-dusky.vercel.app/allmovies/${params.id}`)
       },
       {
         path: "/policy",

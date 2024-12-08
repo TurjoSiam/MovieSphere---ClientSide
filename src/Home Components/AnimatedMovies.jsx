@@ -6,7 +6,7 @@ const AnimatedMovies = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/animatedmovies')
+        fetch('https://server-side-alpha-dusky.vercel.app/animatedmovies')
             .then(res => res.json())
             .then(data => {
                 setMovies(data);

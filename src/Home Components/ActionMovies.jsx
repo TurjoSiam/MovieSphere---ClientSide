@@ -7,7 +7,7 @@ const ActionMovies = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/actionmovies')
+        fetch('https://server-side-alpha-dusky.vercel.app/actionmovies')
             .then(res => res.json())
             .then(data => {
                 setMovies(data);
