@@ -21,7 +21,7 @@ const Banner = () => {
 
     return (
         <div className="bg-[url('/banner.jpg')] h-[600px] object-cover flex gap-10">
-            <div className="w-6/12 my-auto mx-5 py-14 rounded-2xl px-7 bg-[#0000007e] text-white text-4xl font-bold">
+            <div className="w-6/12 h-60 leading-relaxed my-auto mx-5 py-14 rounded-2xl px-7 bg-[#0000007e] text-white text-5xl font-bold">
                 <Typewriter
                     words={['Experience the Magic of Cinema!', 'Where Stories Come to Life.', 'Every Genre. Every Era. Every Story.', 'Lights, Camera, Action... Anytime!']}
                     loop={5}

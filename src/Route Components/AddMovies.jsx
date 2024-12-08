@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const AddMovies = () => {
@@ -15,7 +16,7 @@ const AddMovies = () => {
         setRating(rate);
     }
 
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
     const onSubmit = data => {
@@ -32,6 +33,11 @@ const AddMovies = () => {
             .then(result => {
                 console.log(result);
                 reset();
+                Swal.fire({
+                    title: "Added!",
+                    text: "Your movie has been added.",
+                    icon: "success"
+                });
             })
     }
 
@@ -48,13 +54,18 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Movie Title
                         </label>
-                        <input {...register("title")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Movie title" />
+                        <input {...register("title", { required: 'Title is required', minLength: { value: 2, message: 'Title must be at least 2 characters' } })} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Movie title" />
+                        {
+                            errors.title && (
+                                <p className="text-red-500 text-xs italic">{errors.title.message}</p>
+                            )
+                        }
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Genre
                         </label>
-                        <select {...register("genre")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <select {...register("genre", { required: 'Genre is required' })} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="">Select a genre</option>
                             <option value="Animated">Animated</option>
                             <option value="Action">Action</option>
@@ -62,6 +73,11 @@ const AddMovies = () => {
                             <option value="Horror">Horror</option>
                             <option value="Music">Music</option>
                         </select>
+                        {
+                            errors.genre && (
+                                <p className="text-red-500 text-xs italic">{errors.genre.message}</p>
+                            )
+                        }
                     </div>
                 </div>
                 {/* duration and release year */}
@@ -70,13 +86,18 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Duration
                         </label>
-                        <input {...register("duration")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" placeholder="Duration (minutes)" />
+                        <input {...register("duration", { required: 'Duration is required', min: { value: 61, message: 'Duration must greater than 60 minutes' } })} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" placeholder="Duration (minutes)" />
+                        {
+                            errors.duration && (
+                                <p className="text-red-500 text-xs italic">{errors.duration.message}</p>
+                            )
+                        }
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Release Year
                         </label>
-                        <select {...register("year")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <select {...register("year", { required: 'Year is required' })} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                             <option value="">Select a year</option>
                             <option value="2015">2015</option>
                             <option value="2016">2016</option>
@@ -85,6 +106,11 @@ const AddMovies = () => {
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
                         </select>
+                        {
+                            errors.year && (
+                                <p className="text-red-500 text-xs italic">{errors.year.message}</p>
+                            )
+                        }
                     </div>
                 </div>
                 {/* image url and rating */}
@@ -93,7 +119,12 @@ const AddMovies = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Poster
                         </label>
-                        <input {...register("poster")} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Image URL" />
+                        <input {...register("poster", { required: 'Poster is required' })} className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="url" placeholder="Image URL" />
+                        {
+                            errors.poster && (
+                                <p className="text-red-500 text-xs italic">{errors.poster.message}</p>
+                            )
+                        }
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -103,6 +134,11 @@ const AddMovies = () => {
                             <Rating onClick={handleRating} transition={true} allowFraction={true}></Rating>
                             <input readOnly className="py-2 text-center appearance-none block w-full bg-gray-100 text-gray-500 border border-gray-200 rounded"  {...register("rating")} type="text" value={rating} />
                         </div>
+                        {
+                            rating === 0 && (
+                                <p className="text-red-500 text-xs italic">Rating is required</p>
+                            )
+                        }
                     </div>
                 </div>
                 {/* email and cover photo */}
@@ -127,7 +163,12 @@ const AddMovies = () => {
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Summary
                     </label>
-                    <textarea {...register("summary")} className="appearance-none block w-full h-32 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Write small summary of the movie" />
+                    <textarea {...register("summary", { required: 'Summary is required', minLength: { value: 10, message: 'Must be at least 10 characters long' } })} className="appearance-none block w-full h-32 bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Write small summary of the movie" />
+                    {
+                        errors.summary && (
+                            <p className="text-red-500 text-xs italic">{errors.summary.message}</p>
+                        )
+                    }
                 </div>
                 {/* submit */}
                 <input className="btn w-full" type="submit" value="Add Movie" />
