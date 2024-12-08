@@ -19,6 +19,8 @@ import MyFavourites from './Route Components/MyFavourites.jsx';
 import PrivateRoute from './Route Components/PrivateRoute.jsx';
 import MovieDetails from './Route Components/MovieDetails.jsx';
 import UpdateMovie from './Route Components/UpdateMovie.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const router = createBrowserRouter([
@@ -82,6 +84,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </AuthProvider>
   </StrictMode>,
 )

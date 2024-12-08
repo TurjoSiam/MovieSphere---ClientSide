@@ -26,7 +26,7 @@ const Footer = () => {
                         <br />
                         Streaming movies and tv-series since 2005
                     </p>
-                    <p className="w-96 text-xs text-gray-500">
+                    <p className="md:w-60 lg:w-96 text-xs text-gray-500">
                         Dive into a world of unlimited entertainment with Movie Sphere, where movies come to life. From Hollywood blockbusters to indie gems, thrilling action to heartwarming romances.
                     </p>
                 </aside>

@@ -47,7 +47,7 @@ const AddMovies = () => {
 
 
     return (
-        <div className="w-full mx-auto my-10">
+        <div className="w-10/12 md:w-full mx-auto my-10">
             <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">Add New Movie</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto max-w-lg">
                 {/* title and genre */}
@@ -173,7 +173,7 @@ const AddMovies = () => {
                     }
                 </div>
                 {/* submit */}
-                <input className="btn w-full" type="submit" value="Add Movie" />
+                <input className="btn w-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="submit" value="Add Movie" />
 
             </form>
         </div>

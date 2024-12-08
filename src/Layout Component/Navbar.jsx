@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import logo from '../../src/assets/logo.png'
+import { toast } from "react-toastify";
 
 
 const Navbar = () => {
@@ -11,7 +12,7 @@ const Navbar = () => {
     const handleSignout = () => {
         userSignout()
             .then(() => {
-                alert('user signed out')
+                toast.success('User signed out')
             })
             .catch((error) => {
                 console.log('ERROR', error);
@@ -31,7 +32,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="w-full px-20 mx-auto sticky top-0 bg-[#ffffffbe] backdrop-blur-2xl z-10">
+        <div className="w-full md:10 lg:px-20 mx-auto sticky top-0 bg-[#ffffffbe] backdrop-blur-2xl z-10">
             <div className="navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -57,7 +58,7 @@ const Navbar = () => {
                     </div>
                     <Link to="/allmovies" className="flex items-center gap-1">
                         <img className="w-8" src={logo} alt="logo" />
-                        <h2 className="text-3xl text-orange-800 font-bold">Movie Sphere</h2>
+                        <h2 className="text-3xl hidden md:block text-orange-800 font-bold">Movie Sphere</h2>
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">

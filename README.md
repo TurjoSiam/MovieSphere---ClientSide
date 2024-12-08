@@ -1,8 +1,9 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Project Name: Movie Sphere
+## Features:
+- Registration, Login, Authentication
+- Private routes for logged in users
+- Adding, deleting and updating movies in database
+- Adding and deleting favorite movies in database for separate users.
+- Search functionality in all movies page.
+## Live site link:
+https://movie-sphere-turjosiam.netlify.app/

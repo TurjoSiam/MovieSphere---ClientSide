@@ -89,11 +89,11 @@ const MovieDetails = () => {
             <div className="w-full">
                 <img className="w-full max-h-[500px] object-cover brightness-50" src={cover} alt="movie cover photo" />
             </div>
-            <div className="w-full h-[400px] relative">
-                <div className="absolute border p-7 bg-base-100 rounded-2xl -top-28 flex items-start justify-start gap-7 w-8/12 mx-auto inset-x-0">
+            <div className="w-full h-[1000px] md:[500px] lg:h-[400px] relative">
+                <div className="absolute border p-7 bg-base-100 rounded-2xl -top-28 flex-col md:flex items-start justify-start gap-7 w-10/12 md:w-8/12 mx-auto inset-x-0">
                     <div className="w-full">
                         <img className="w-60 rounded-xl" src={poster} alt="movie poster" />
-                        <button onClick={handleAllMovies} className="btn mt-3 w-full">All Movies</button>
+                        <button onClick={handleAllMovies} className="btn mt-3 w-full text-black bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">All Movies</button>
                     </div>
                     <div className="space-y-4">
                         <h2 className="text-4xl font-bold">{title}</h2>
@@ -105,9 +105,9 @@ const MovieDetails = () => {
                             <h3><span className="font-semibold">Rating:</span> {rating}/5</h3>
                         </div>
                         <div>
-                            <button onClick={() => handleDelete(_id)} className="btn mr-2"><MdDelete />Delete</button>
-                            <Link to={`/allmovies/updatemovie/${_id}`} className="btn mr-2"><FaEdit />Update</Link>
-                            <button onClick={handleFavorite} className="btn"><MdFavorite />Add to Favorite</button>
+                            <button onClick={() => handleDelete(_id)} className="btn mr-2 text-black bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><MdDelete />Delete</button>
+                            <Link to={`/allmovies/updatemovie/${_id}`} className="btn mr-2 text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><FaEdit />Update</Link>
+                            <button onClick={handleFavorite} className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><MdFavorite />Add to Favorite</button>
                         </div>
                     </div>
                 </div>
