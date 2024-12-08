@@ -8,6 +8,8 @@ import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
 
+    document.title = 'Movie Sphere | Login';
+
     const navigate = useNavigate();
 
     const { signInUser, googleLogin } = useContext(AuthContext);

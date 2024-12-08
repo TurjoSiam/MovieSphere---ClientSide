@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Featured = ({movie}) => {
+const Featured = ({ movie }) => {
 
     const handleDetails = (_id) => {
         console.log(_id);

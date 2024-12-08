@@ -37,8 +37,9 @@ const router = createBrowserRouter([
         element: <PrivateRoute><AddMovies></AddMovies></PrivateRoute>
       },
       {
-        path: "/myfavorite",
-        element: <PrivateRoute><MyFavourites></MyFavourites></PrivateRoute>
+        path: "/myfavorite/:email",
+        element: <PrivateRoute><MyFavourites></MyFavourites></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/favoritemovies/${params.email}`)
       },
       {
         path: "/allmovies",

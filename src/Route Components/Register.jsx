@@ -8,6 +8,8 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
 
+    document.title = 'Movie Sphere | Register';
+
     const navigate = useNavigate();
 
     const { createUser, updateProfileWhenLogin } = useContext(AuthContext);

@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 
 const AddMovies = () => {
 
+    document.title = 'Movie Sphere | Add Movie';
+
     const { user } = useContext(AuthContext);
 
     const [rating, setRating] = useState(0);

@@ -6,6 +6,7 @@ import FeaturedMovies from "../Home Components/FeaturedMovies";
 
 const Home = () => {
 
+    document.title = "Movie Sphere | Home"
 
     return (
         <>

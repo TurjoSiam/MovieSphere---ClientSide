@@ -4,6 +4,8 @@ import Movie from "./Movie";
 
 const AllMovies = () => {
 
+    document.title = 'Movie Sphere | All Movies';
+
     const data = useLoaderData();
 
     return (

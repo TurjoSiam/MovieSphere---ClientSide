@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 
 const UpdateMovie = () => {
 
+    document.title = 'Movie Sphere | Update Movie';
+
     const data = useLoaderData();
     const { _id, title, year, genre, summary, duration, poster, cover, email } = data;
 

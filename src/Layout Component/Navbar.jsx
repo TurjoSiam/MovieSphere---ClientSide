@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import logo from '../../src/assets/logo.png'
 
 
 const Navbar = () => {
@@ -9,12 +10,12 @@ const Navbar = () => {
 
     const handleSignout = () => {
         userSignout()
-        .then(() => {
-            alert('user signed out')
-        })
-        .catch((error) => {
-            console.log('ERROR', error);
-        })
+            .then(() => {
+                alert('user signed out')
+            })
+            .catch((error) => {
+                console.log('ERROR', error);
+            })
     }
 
     const link = <>
@@ -23,7 +24,7 @@ const Navbar = () => {
         {
             user && <>
                 <li><NavLink to="/addmovies">Add Movie</NavLink></li>
-                <li><NavLink to="/myfavorite">My Favorite</NavLink></li>
+                <li><NavLink to={`/myfavorite/${user?.email}`}>My Favorite</NavLink></li>
             </>
         }
         <li><NavLink to="/policy">Policy</NavLink></li>
@@ -54,27 +55,30 @@ const Navbar = () => {
                             {link}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Movie Sphere</a>
+                    <Link to="/allmovies" className="flex items-center gap-1">
+                        <img className="w-8" src={logo} alt="logo" />
+                        <h2 className="text-3xl text-orange-800 font-bold">Movie Sphere</h2>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1 space-x-5">
+                    <ul className="menu menu-horizontal px-1 space-x-2">
                         {link}
                     </ul>
                 </div>
                 <div className="navbar-end">
                     {
                         user && user?.email ?
-                        <>
-                            <div className="mr-3 tooltip tooltip-bottom" data-tip={user.displayName}>
-                                <img className="w-10 h-10 rounded-full object-cover" src={user?.photoURL} alt="profile photo" />
-                            </div>
-                            <Link onClick={handleSignout} className="btn" to="/">Logout</Link>
-                        </> 
-                        :
-                        <>
-                            <Link className="btn mr-3" to="login">Login</Link>
-                            <Link className="btn" to="register">Register</Link>
-                        </>
+                            <>
+                                <div className="mr-3 tooltip tooltip-bottom" data-tip={user?.displayName}>
+                                    <img className="w-10 h-10 rounded-full object-cover" src={user?.photoURL} alt="profile photo" />
+                                </div>
+                                <Link onClick={handleSignout} className="btn" to="/">Logout</Link>
+                            </>
+                            :
+                            <>
+                                <Link className="btn mr-3" to="login">Login</Link>
+                                <Link className="btn" to="register">Register</Link>
+                            </>
                     }
                 </div>
             </div>

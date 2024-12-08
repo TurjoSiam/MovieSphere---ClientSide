@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete, MdFavorite } from "react-icons/md";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const MovieDetails = () => {
 
@@ -9,6 +11,21 @@ const MovieDetails = () => {
 
     const data = useLoaderData();
     const { _id, title, year, genre, rating, summary, duration, poster, cover } = data;
+
+    const user = useContext(AuthContext);
+    const email = user.user.email;
+
+    const favorite = {
+        title: title,
+        year: year,
+        genre: genre,
+        rating: rating,
+        summary: summary,
+        duration: duration,
+        poster: poster,
+        cover: cover,
+        email: email
+    }
 
     const handleDelete = (_id) => {
         console.log(_id);
@@ -46,6 +63,27 @@ const MovieDetails = () => {
     }
 
 
+    const handleFavorite = () => {
+        fetch('http://localhost:5000/favoritemovies', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(favorite)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                Swal.fire({
+                    title: "Added!",
+                    text: "Your movie has been added to Favorite.",
+                    icon: "success"
+                });
+            })
+    }
+
+
+
     return (
         <div>
             <div className="w-full">
@@ -69,7 +107,7 @@ const MovieDetails = () => {
                         <div>
                             <button onClick={() => handleDelete(_id)} className="btn mr-2"><MdDelete />Delete</button>
                             <Link to={`/allmovies/updatemovie/${_id}`} className="btn mr-2"><FaEdit />Update</Link>
-                            <button className="btn"><MdFavorite />Add to Favorite</button>
+                            <button onClick={handleFavorite} className="btn"><MdFavorite />Add to Favorite</button>
                         </div>
                     </div>
                 </div>
