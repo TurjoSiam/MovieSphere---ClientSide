@@ -32,7 +32,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="w-full md:10 lg:px-20 mx-auto sticky top-0 bg-[#ffffffbe] backdrop-blur-2xl z-10">
+        <div className="w-full md:10 lg:px-20 mx-auto sticky top-0 bg-[#ffe8d0be] backdrop-blur-2xl z-10">
             <div className="navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -73,12 +73,12 @@ const Navbar = () => {
                                 <div className="mr-3 tooltip tooltip-bottom" data-tip={user?.displayName}>
                                     <img className="w-10 h-10 rounded-full object-cover" src={user?.photoURL} alt="profile photo" />
                                 </div>
-                                <Link onClick={handleSignout} className="btn" to="/">Logout</Link>
+                                <Link onClick={handleSignout} className="btn bg-orange-800 text-white hover:bg-orange-200 outline outline-transparent hover:outline-orange-800 duration-300 ease-in-out hover:text-orange-800" to="/">Logout</Link>
                             </>
                             :
                             <>
-                                <Link className="btn mr-3" to="login">Login</Link>
-                                <Link className="btn" to="register">Register</Link>
+                                <Link className="btn bg-orange-800 text-white hover:bg-orange-200 outline outline-transparent hover:outline-orange-800 duration-300 ease-in-out hover:text-orange-800 mr-3" to="login">Login</Link>
+                                <Link className="btn bg-orange-800 text-white hover:bg-orange-200 outline outline-transparent hover:outline-orange-800 duration-300 ease-in-out hover:text-orange-800" to="register">Register</Link>
                             </>
                     }
                 </div>

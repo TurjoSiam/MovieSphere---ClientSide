@@ -6,6 +6,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import registerPhoto from '../../src/assets/signup.png'
 
 const Register = () => {
 
@@ -13,7 +14,7 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const { createUser, updateProfileWhenLogin } = useContext(AuthContext);
+    const { createUser, updateProfileWhenLogin, userSignout } = useContext(AuthContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -28,8 +29,15 @@ const Register = () => {
                     photoURL: photo
                 })
                     .then(() => {
-                        navigate("/");
-                        toast.success('User registered successfully')
+                        userSignout()
+                            .then(() => {
+                                navigate("/login");
+                                toast.success('User registered successfully')
+                            })
+                            .catch((error) => {
+                                console.log('ERROR', error.message);
+                            })
+
                     })
             })
             .catch((error) => {
@@ -41,10 +49,9 @@ const Register = () => {
 
 
     return (
-        <div className="md:w-full w-10/12 mx-auto my-10">
-            <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">New User Registration</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto max-w-lg">
-                {/* title and genre */}
+        <div className="md:w-10/12 mx-auto my-10 flex items-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 mx-auto max-w-lg">
+                <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">New User Registration</h2>
                 <div className="w-full mb-6">
                     <label className="uppercase tracking-wide text-gray-700 text-sm flex items-center gap-1 font-bold mb-2">
                         <FaUserAlt />Name
@@ -91,8 +98,11 @@ const Register = () => {
                 </div>
                 {/* submit */}
                 <p className="text-sm text-gray-600 mb-10">Already registered?<Link to="/login" className="text-blue-600 hover:font-bold"> Login Here</Link></p>
-                <input className="btn text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-full" type="submit" value="Register" />
+                <input className="btn w-full flex bg-orange-900 text-white hover:bg-orange-200 outline outline-transparent hover:outline-orange-800 duration-300 ease-in-out hover:text-orange-800 mb-2 w-full" type="submit" value="Register" />
             </form>
+            <div className="w-1/3">
+                <img src={registerPhoto} alt="register photo" />
+            </div>
         </div>
     );
 };

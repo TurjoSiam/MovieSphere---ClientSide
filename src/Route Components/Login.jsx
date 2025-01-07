@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
+import loginPhoto from '../../src/assets/login.png'
 
 const Login = () => {
 
@@ -22,6 +23,7 @@ const Login = () => {
             .then(result => {
                 console.log(result);
                 toast.success('User logged in successfully')
+                navigate("/")
             })
             .catch((error) => {
                 console.log('ERROR', error);
@@ -39,10 +41,9 @@ const Login = () => {
     }
 
     return (
-        <div className="md:w-full w-10/12 mx-auto my-10">
-            <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">Welcome Back! Please Log In</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto max-w-lg">
-                {/* title and genre */}
+        <div className="md:w-10/12 mx-auto my-16 flex items-center flex-col-reverse md:flex-row">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 mx-auto max-w-lg">
+                <h2 className="text-3xl font-bold mb-10 mx-auto w-full max-w-lg text-center">Welcome Back! Please Log In</h2>
                 <div className="w-full mb-6">
                     <label className="uppercase tracking-wide text-gray-700 text-sm flex items-center gap-1 font-bold mb-2">
                         <MdEmail />Email
@@ -57,9 +58,12 @@ const Login = () => {
                 </div>
                 {/* submit */}
                 <p className="text-sm text-gray-600 mb-6">New user?<Link to="/register" className="text-blue-600 hover:font-bold">  Register</Link></p>
-                <input className="btn mb-3 w-full text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="submit" value="Login" />
-                <button onClick={handleGoogleLogin} className='btn w-full flex text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 items-center gap-1'><FcGoogle /> Login with Google</button>
+                <input className="btn w-full bg-orange-900 text-white hover:bg-orange-200 outline outline-transparent hover:outline-orange-800 duration-300 ease-in-out hover:text-orange-800 mb-1" type="submit" value="Login" />
+                <button onClick={handleGoogleLogin} className='btn w-full flex bg-orange-900 text-white hover:bg-orange-200 outline outline-transparent hover:outline-orange-800 duration-300 ease-in-out hover:text-orange-800 mb-2 items-center gap-1'><FcGoogle /> Login with Google</button>
             </form>
+            <div className='w-1/3'>
+                <img src={loginPhoto} alt="login photo" />
+            </div>
         </div>
     );
 };

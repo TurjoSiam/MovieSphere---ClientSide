@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('https://server-side-alpha-dusky.vercel.app/featuredmovies')
+        loader: () => fetch('http://localhost:5000/featuredmovies')
       },
       {
         path: "/addmovies",
@@ -45,12 +45,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/allmovies",
-        element: <AllMovies></AllMovies>,
-        loader: () => fetch('https://server-side-alpha-dusky.vercel.app/allmovies')
+        element: <AllMovies></AllMovies>
       },
       {
         path: "/allmovies/:id",
-        element: <PrivateRoute><MovieDetails></MovieDetails></PrivateRoute>,
+        element: <MovieDetails></MovieDetails>,
         loader: ({params}) => fetch(`https://server-side-alpha-dusky.vercel.app/allmovies/${params.id}`)
       },
       {
