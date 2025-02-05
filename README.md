@@ -54,4 +54,12 @@
 
 ## 🖼 Screenshot
 
-![Movie Sphere Screenshot](screenshot-link-here)  
+![Movie Sphere Screenshot](https://github.com/TurjoSiam/MovieSphere---ClientSide/blob/main/web2.png)  
+
+## 🏃‍♂️ How to Run the Project Locally
+
+   ```bash
+   git clone https://github.com/your-username/ratewise.git
+   cd ratewise
+   npm install
+   npm run dev
