@@ -2,6 +2,9 @@
 
 **Movie Sphere** is a platform that allows users to register, log in, and manage movie data. Users can add, update, delete, and manage their favorite movies. The platform also includes a search functionality to easily browse through the movies.
 
+## 🌍 Live Project Link
+https://movie-sphere-turjosiam.netlify.app
+
 
 ## 🌟 Key Features
 
